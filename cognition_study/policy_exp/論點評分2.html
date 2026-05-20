@@ -1,0 +1,99 @@
+{{ block title }}
+論點評分
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #007bff;">
+    <h4 style="color: #007bff; margin-bottom: 15px;">論點內容：</h4>
+    <p style="font-size: 1.1em; line-height: 1.6; color: #333;">{{ 論點內容 }}</p>
+</div>
+
+<div style="background-color: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #17a2b8; color: #0c5460; font-size: 1.05em; line-height: 1.6;">
+    <span style="color: #555; font-size: 0.95em;">
+        評分指示：<br>請盡可能保持客觀，針對上方論點的說服力和邏輯性進行評分。<br>選擇<strong>1</strong>表示非常沒有說服力 / 邏輯性；選擇<strong>9</strong>表示非常有說服力 / 邏輯性。<br>(數字越大代表您認為該論點越有說服力 / 邏輯性)
+    </span>
+</div>
+
+<div style="margin-top: 10px;">
+    {% for field in form %}
+        <div style="margin-bottom: 30px;">
+            
+            <label style="font-weight: bold; margin-bottom: 10px; display: block; font-size: 1.15rem;">
+                {% if '說服力' in field.name %}
+                    論點說服力
+                {% elif '邏輯性' in field.name %}
+                    論點邏輯性
+                {% endif %}
+            </label>
+            
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+                {% if '說服力' in field.name %}
+                    <span style="font-weight: bold; color: #555;">非常沒有說服力</span>
+                    {{ field }}
+                    <span style="font-weight: bold; color: #555;">非常有說服力</span>
+                {% elif '邏輯性' in field.name %}
+                    <span style="font-weight: bold; color: #555;">非常沒有邏輯性</span>
+                    {{ field }}
+                    <span style="font-weight: bold; color: #555;">非常有邏輯性</span>
+                {% endif %}
+            </div>
+            {{ formfield_errors field.name }}
+        </div>
+    {% endfor %}
+</div>
+
+<br>
+<div style="text-align: center;">
+    <button class="otree-btn-next btn btn-primary">確認評分，前往下一題</button>
+</div>
+
+<style>
+    /* 讓水平單選框變成上下排列，且數字在上、圈圈在下 */
+    .form-check-inline {
+        display: inline-flex !important;
+        flex-direction: column-reverse !important; 
+        align-items: center !important;
+        gap: 8px !important; 
+        margin: 0 6px !important;
+    }
+    
+    .form-check-label {
+        font-weight: 500;
+        color: #666 !important;
+        margin-left: 0 !important; 
+        cursor: pointer;
+    }
+    
+    .form-check-input {
+        margin: 0 !important;
+        cursor: pointer;
+        transform: scale(1.1); 
+    }
+</style>
+<style>
+/* 1. 放大整個網頁的預設字體與行距 */
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+/* 2. 讓按鈕的字體也跟著長大 */
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+/* 4. 微調一下標題的大小，讓版面更有層次 */
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

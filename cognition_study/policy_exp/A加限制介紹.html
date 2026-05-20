@@ -1,0 +1,86 @@
+{{ block title }}
+議題背景介紹：什麼是A+比例限制？
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #FFF0F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+    <h4 style="color: #D87093;">分數通膨與A+比例限制</h4>
+    <p>近年來大學分數通膨嚴重，成績單失去鑑別度。以台大為例，111 學年度平均 A+ 比例約為 <strong>31%</strong>。為恢復成績的客觀性，台大與部分學校已開始研擬「限制 A+ 比例」政策。雖然台大目前尚未全面強制規定，但已有部分教師自行訂定嚴格的 A+ 名額配給。</p>
+    
+    <p>政策重點與爭議：</p>
+    <ul>
+        <li><strong>作法：</strong>針對課程設定 A+ 名額上限，或提高 A+ 的評分標準。</li>
+        <li><strong>支持方：</strong>認為能確保成績真實反映學習表現、提高成績單可信度。</li>
+        <li><strong>反對方：</strong>擔憂引發同學間惡性競爭，並影響未來出國留學與求職的優勢。</li>
+    </ul>
+</div>
+
+<!-- 📝 閱讀測驗區塊開始 -->
+<div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+    <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+    <p style="margin-bottom: 10px;">根據上文，以台大 111 學年度平均 A+ 比例約為多少？</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="15"> 15%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="20"> 20%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="31"> 31%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="45"> 45%</label>
+    </div>
+    
+    <p id="quiz-error" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+</div>
+<!-- 📝 閱讀測驗區塊結束 -->
+
+<p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+
+<!-- 將原本的 next_button 換成自訂的按鈕來檢查答案 -->
+<button type="button" class="btn btn-primary" onclick="checkQuiz()">下一頁</button>
+
+<script>
+    function checkQuiz() {
+        // 抓取受試者選了哪一個選項
+        let selected = document.querySelector('input[name="quiz"]:checked');
+        let errorMsg = document.getElementById('quiz-error');
+        
+        if (!selected) {
+            // 如果什麼都沒選
+            errorMsg.innerText = "請先回答閱讀測驗才能進入下一頁唷！";
+            errorMsg.style.display = "block";
+        } else if (selected.value !== "31") {
+            // 如果選錯了
+            errorMsg.innerText = "請再仔細看看上面的文章敘述唷!";
+            errorMsg.style.display = "block";
+        } else {
+            // 答對了，隱藏錯誤訊息並順利送出 oTree 表單
+            errorMsg.style.display = "none";
+            document.getElementById('form').submit();
+        }
+    }
+</script>
+
+<style>
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 讓測驗的圓形選項稍微變大一點，比較好點擊 */
+input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

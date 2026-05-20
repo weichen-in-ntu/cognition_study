@@ -1,0 +1,86 @@
+{{ block title }}
+議題背景介紹：什麼是囤房稅？
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #FFF0F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+    <h4 style="color: #D87093;">囤房稅的初衷與爭議</h4>
+    <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，針對「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
+    
+    <p>政策重點與正反意見：</p>
+    <ul>
+        <li><strong>作法：</strong>針對持有四戶以上非自住房屋者制定「差別稅率」，持有的房子越多，稅率就越高。</li>
+        <li><strong>支持方：</strong>期望透過稅收干預，有效抑制房地產過度炒作與囤積現象。</li>
+        <li><strong>反對方：</strong>擔憂政府過度干預自由市場，且房東或建商可能將稅金轉嫁給租客或買家。</li>
+    </ul>
+</div>
+
+<!--閱讀測驗區塊開始 -->
+<div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+    <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+    <p style="margin-bottom: 10px;">根據上文，台北市針對「第四棟非自住住宅」所課徵的囤房稅率為多少？</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="1.5"> 1.5%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="2.4"> 2.4%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="3.8"> 3.8%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="5.2"> 5.2%</label>
+    </div>
+    
+    <p id="quiz-error" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+</div>
+<!-- 📝 閱讀測驗區塊結束 -->
+
+<p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+
+<!-- 將原本的 next_button 換成自訂的按鈕來檢查答案 -->
+<button type="button" class="btn btn-primary" onclick="checkQuiz()">下一頁</button>
+
+<script>
+    function checkQuiz() {
+        // 抓取受試者選了哪一個選項
+        let selected = document.querySelector('input[name="quiz"]:checked');
+        let errorMsg = document.getElementById('quiz-error');
+        
+        if (!selected) {
+            // 如果什麼都沒選
+            errorMsg.innerText = "請先回答閱讀測驗才能進入下一頁唷！";
+            errorMsg.style.display = "block";
+        } else if (selected.value !== "3.8") {
+            // 如果選錯了
+            errorMsg.innerText = "請再仔細看看上面的文章敘述唷!";
+            errorMsg.style.display = "block";
+        } else {
+            // 答對了，隱藏錯誤訊息並順利送出 oTree 表單
+            errorMsg.style.display = "none";
+            document.getElementById('form').submit();
+        }
+    }
+</script>
+
+<style>
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 讓測驗的圓形選項稍微變大一點，比較好點擊 */
+input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

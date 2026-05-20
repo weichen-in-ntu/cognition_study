@@ -1,0 +1,61 @@
+{{ block title }}
+市長候選人政見發表
+{{ endblock }}
+
+{{ block content }}
+<p>以下是兩位候選人的核心政見。請仔細比較他們主張的囤房稅率差異：</p>
+
+<div style="display: flex; justify-content: space-between; gap: 20px;">
+    <div style="flex: 1; border: 1px solid #ccc; padding: 20px; border-radius: 8px; text-align: center;">
+        <img src="{% static 'candidate_a.png' %}" alt="候選人A照片" style="width: 150px; height: 150px; object-fit: contain; margin: 0 auto; display: block;">
+        <h4 style="margin-top: 15px;">候選人 A</h4>
+        <div style="background-color: #FFF0F5; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <p style="margin: 0; font-size: 1.1rem; color: #555;">【落實居住正義，打擊空屋囤積】</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.1rem;">承諾將囤房稅率調整為：</p>
+            <p style="margin: 5px 0 0 0; font-size: 2rem; font-weight: bold; color: #D87093;">{{ 候選人A_稅率 }}%</p>
+        </div>
+    </div>
+
+    <div style="flex: 1; border: 1px solid #ccc; padding: 20px; border-radius: 8px; text-align: center;">
+        <img src="{% static 'candidate_b.png' %}" alt="候選人B照片" style="width: 150px; height: 150px; object-fit: contain; margin: 0 auto; display: block;">
+        <h4 style="margin-top: 15px;">候選人 B</h4>
+        <div style="background-color: #FFF0F5; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <p style="margin: 0; font-size: 1.1rem; color: #555;">【落實居住正義，打擊空屋囤積】</p>
+            <p style="margin: 10px 0 0 0; font-size: 1.1rem;">承諾將囤房稅率調整為：</p>
+            <p style="margin: 5px 0 0 0; font-size: 2rem; font-weight: bold; color: #D87093;">{{ 候選人B_稅率 }}%</p>
+        </div>
+    </div>
+</div>
+
+<br><br>
+<div style="text-align: center;">
+    <button class="otree-btn-next btn btn-primary">我已經了解他們的政見，準備投票</button>
+</div>
+
+<style>
+/* 1. 放大整個網頁的預設字體與行距 */
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+/* 2. 讓按鈕的字體也跟著長大 */
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+/* 4. 微調一下標題的大小，讓版面更有層次 */
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

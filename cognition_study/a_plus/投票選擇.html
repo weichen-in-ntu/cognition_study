@@ -1,0 +1,70 @@
+{{ block title }}
+請投下您神聖的一票
+{{ endblock }}
+
+{{ block content }}
+<p>請想像自己身為T市公民，點擊下方圖片或選項，選擇您最支持的候選人：<br>
+（注意：這不是真實的選舉，您無需考量現實法規的上下限。）</p>
+
+<div style="display: flex; justify-content: space-around; margin-top: 30px;">
+    
+    <label style="cursor: pointer; text-align: center; padding: 10px; border: 1px solid transparent; border-radius: 5px; transition: 0.3s;">
+        <img src="{% static 'candidate_a.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
+        <br>
+        <input type="radio" name="囤房稅後續選擇" value="{{ 候選人A_稅率 }}" required>
+        支持 候選人A（主張稅率：{{ 候選人A_稅率 }}%）
+    </label>
+
+    <label style="cursor: pointer; text-align: center; padding: 10px; border: 1px solid transparent; border-radius: 5px; transition: 0.3s;">
+        <img src="{% static 'candidate_b.png' %}" style="width: 180px; height: 180px; object-fit: contain; margin: 0 auto; display: block;">
+        <br>
+        <input type="radio" name="囤房稅後續選擇" value="{{ 候選人B_稅率 }}" required>
+        支持 候選人B（主張稅率：{{ 候選人B_稅率 }}%）
+    </label>
+
+</div>
+
+<br><br>
+<div style="text-align: center;">
+    <button class="otree-btn-next btn btn-primary">確認投票，送出選票</button>
+</div>
+
+{# 加入一點點 CSS 讓滑鼠移過時有發光效果，增加互動感 #}
+<style>
+    label:hover {
+        border-color: #007bff !important;
+        background-color: #f8f9fa;
+        box-shadow: 0 0 10px rgba(0,123,255,0.2);
+    }
+    input[type=radio] {
+        transform: scale(1.2); 
+        margin-right: 5px;
+    }
+</style>
+<style>
+/* 1. 放大整個網頁的預設字體與行距 */
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+/* 2. 讓按鈕的字體也跟著長大 */
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+/* 4. 微調一下標題的大小，讓版面更有層次 */
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

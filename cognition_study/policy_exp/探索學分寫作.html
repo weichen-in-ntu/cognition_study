@@ -1,0 +1,103 @@
+{{ block title }}
+請為您支持的候選人辯護
+{{ endblock }}
+
+{{ block content }}
+<div class="card m-3" style="border-color: #dc3545;">
+    <div class="card-body">
+        <h5 style="color: #dc3545; font-weight: bold;">🚨 突發新聞！選戰進入白熱化階段！</h5>
+        <p>您剛剛投票支持的 {{ 支持的候選人 }}（主張：<strong>探索學分上限為 {{ 支持的政見 }} 學分</strong>），其修課制度政策遭到了敵對陣營與部分校園媒體的猛烈攻擊！</p>
+        
+        
+        <p>作為{{ 支持的候選人 }}的堅定支持者與T大學生，競選團隊現在急需您的力量來穩定軍心。</p>
+        
+        <p><strong>請在下方撰寫一篇短文，為您支持的探索學分政策進行辯護。請您提出<span style="color: #dc3545; font-weight: bold;">至少兩個</span>支持該政策的理由：</strong></p>
+        
+        <p style="font-size: 0.9em; color: #555;">
+            ⚠️ 注意：<span style="color: #dc3545; font-weight: bold;">請至少填寫 70 字</span>，本頁面最多停留 10 分鐘，書寫完畢後即可送出。<br>
+            <span style="font-weight: bold;">（本頁已禁止複製貼上，請您親自打字輸入您的觀點）</span>
+        </p>
+    </div>
+</div>
+
+{{ formfield '探索學分文章' label="" }}
+
+<div id="word_count_display" style="text-align: right; color: #dc3545; margin-top: -10px; margin-bottom: 20px;">
+    目前字數：0 字（至少需 70 字）
+</div>
+
+<div style="text-align: center;">
+    <button class="otree-btn-next btn btn-primary">送出辯護聲明</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let textarea = document.querySelector('textarea');
+        let display = document.getElementById('word_count_display');
+        
+        // 💡 自動化魔法：幫受試者無縫接軌寫好開頭！
+        let policyText = "{{ 支持的政見 }}"; 
+        let threshold = policyText.replace(/[^0-9.]/g, ''); 
+        
+        // 如果輸入框是空的，就自動填上開頭
+        if (textarea.value.trim() === "") {
+            textarea.value = "我認為將探索學分上限設為 " + threshold + " 學分的政策是合理且可行的，因為...";
+        }
+
+        // 觸發一次字數計算
+        let event = new Event('input');
+        textarea.dispatchEvent(event);
+        
+        // 🛠️ 暖暖幫妳獨立出來的「精準字數計算機」
+        function updateWordCount() {
+            // 利用正規表達式 (/\s/g) 把所有的空白、換行都剔除後，再來算長度
+            let count = textarea.value.replace(/\s/g, '').length;
+            display.textContent = '目前字數：' + count + ' 字（至少需 70 字）';
+            
+            if(count < 70) {
+                display.style.color = '#dc3545';
+            } else {
+                display.style.color = 'green';
+            }
+        }
+
+        // 綁定打字事件
+        textarea.addEventListener('input', updateWordCount);
+        
+        // 畫面一載入，就先觸發一次字數計算
+        updateWordCount();
+
+        // 禁止複製貼上功能
+        textarea.addEventListener('paste', function(e) {
+            e.preventDefault(); 
+            alert('本欄位禁止使用「複製貼上」功能，請親自打字喔！');
+        });
+    });
+</script>
+<style>
+/* 1. 放大整個網頁的預設字體與行距 */
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+/* 2. 讓按鈕的字體也跟著長大 */
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+/* 4. 微調一下標題的大小，讓版面更有層次 */
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

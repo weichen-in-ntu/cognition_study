@@ -1,0 +1,86 @@
+{{ block title }}
+議題背景介紹：什麼是探索學分？
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #FFF0F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+    <h4 style="color: #D87093;">探索學分制度與爭議</h4>
+    <p>為了鼓勵跨領域學習，台大推動探索學分制度。學生可將部分課程評分改為「通過／不通過」，及格即可取得學分且不計入 GPA。目前規範每學期最多可申請 <strong>6 學分</strong>，校方對是否提供更多探索學分仍在商議中。</p>
+    
+    <p>政策重點與正反意見：</p>
+    <ul>
+        <li><strong>作法：</strong>增加更多探索額度，提供容錯空間，讓學習嘗試不影響整體的 GPA 表現。</li>
+        <li><strong>支持方：</strong>讓學生能勇敢踏出舒適圈，純粹為興趣而學，減輕成績壓力。</li>
+        <li><strong>反對方：</strong>擔憂制度淪為美化 GPA 的工具，且學生可能因不計分而降低對課程的投入感。</li>
+    </ul>
+</div>
+
+<!-- 📝 閱讀測驗區塊開始 -->
+<div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+    <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+    <p style="margin-bottom: 10px;">根據上文，台大目前規範每學期最多可申請多少探索學分？</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="3"> 3 學分</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="6"> 6 學分</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="9"> 9 學分</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="12"> 12 學分</label>
+    </div>
+    
+    <p id="quiz-error" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+</div>
+<!-- 📝 閱讀測驗區塊結束 -->
+
+<p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+
+<!-- 將原本的 next_button 換成自訂的按鈕來檢查答案 -->
+<button type="button" class="btn btn-primary" onclick="checkQuiz()">下一頁</button>
+
+<script>
+    function checkQuiz() {
+        // 抓取受試者選了哪一個選項
+        let selected = document.querySelector('input[name="quiz"]:checked');
+        let errorMsg = document.getElementById('quiz-error');
+        
+        if (!selected) {
+            // 如果什麼都沒選
+            errorMsg.innerText = "請先回答閱讀測驗才能進入下一頁唷！";
+            errorMsg.style.display = "block";
+        } else if (selected.value !== "6") {
+            // 如果選錯了
+            errorMsg.innerText = "請再仔細看看上面的文章敘述唷！";
+            errorMsg.style.display = "block";
+        } else {
+            // 答對了，隱藏錯誤訊息並順利送出 oTree 表單
+            errorMsg.style.display = "none";
+            document.getElementById('form').submit();
+        }
+    }
+</script>
+
+<style>
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 讓測驗的圓形選項稍微變大一點，比較好點擊 */
+input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

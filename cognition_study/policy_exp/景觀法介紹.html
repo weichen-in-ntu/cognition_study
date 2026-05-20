@@ -1,0 +1,86 @@
+{{ block title }}
+議題背景介紹：什麼是下修都更門檻？
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #FFF0F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+    <h4 style="color: #D87093;">下修都更門檻的背景與爭議</h4>
+    <p>台灣老舊房屋眾多，為加速改善居住安全與市容，社會長期呼籲推動都市更新。然而，以台北市為例，由政府領導的公辦都更必須取得至少 <strong>90%</strong> 的居民同意才能執行，導致許多老屋都更案停滯不前。</p>
+    
+    <p>政策重點與正反意見：</p>
+    <ul>
+        <li><strong>作法：</strong>下修都市更新的法定同意門檻比例。區域內只需更少的居民同意，即可啟動強制性的老屋重建。</li>
+        <li><strong>支持方：</strong>能有效加速整頓老舊市容，解決危老建築的公共安全隱患，提升整體的城市美學與生活品質。</li>
+        <li><strong>反對方：</strong>擔憂嚴重侵蝕私人產權。不同意改建的少數屋主將失去對自有房屋的保留權，甚至可能因多數決而遭到強制拆遷。</li>
+    </ul>
+</div>
+
+<!-- 📝 閱讀測驗區塊開始 -->
+<div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+    <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+    <p style="margin-bottom: 10px;">根據上文，目前台北市內政府領導的「公辦都更」必須取得至少多少比例的居民同意才能執行？</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="70"> 70%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="80"> 80%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="85"> 85%</label>
+        <label style="cursor: pointer;"><input type="radio" name="quiz" value="90"> 90%</label>
+    </div>
+    
+    <p id="quiz-error" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+</div>
+<!-- 📝 閱讀測驗區塊結束 -->
+
+<p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+
+<!-- 將原本的 next_button 換成自訂的按鈕來檢查答案 -->
+<button type="button" class="btn btn-primary" onclick="checkQuiz()">下一頁</button>
+
+<script>
+    function checkQuiz() {
+        // 抓取受試者選了哪一個選項
+        let selected = document.querySelector('input[name="quiz"]:checked');
+        let errorMsg = document.getElementById('quiz-error');
+        
+        if (!selected) {
+            // 如果什麼都沒選
+            errorMsg.innerText = "請先回答閱讀測驗才能進入下一頁唷！";
+            errorMsg.style.display = "block";
+        } else if (selected.value !== "90") {
+            // 如果選錯了
+            errorMsg.innerText = "請再仔細看看上面的文章敘述唷!";
+            errorMsg.style.display = "block";
+        } else {
+            // 答對了，隱藏錯誤訊息並順利送出 oTree 表單
+            errorMsg.style.display = "none";
+            document.getElementById('form').submit();
+        }
+    }
+</script>
+
+<style>
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 讓測驗的圓形選項稍微變大一點，比較好點擊 */
+input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

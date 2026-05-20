@@ -1,0 +1,45 @@
+{{ block title }}
+第一階段:實驗議題介紹
+{{ endblock }}
+
+{{ block content }}
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <p>接下來您將正式進入「第一階段」。</p>
+
+        <p>在第一階段中，我們將會請您閱讀四項公共政策的相關資訊，並簡單詢問您對四個議題的初步觀點與看法。</p>
+
+        <p>如果您已經準備好了，請點擊下方按鈕開始第一階段的測驗。</p>
+    </div>
+</div>
+
+<div style="text-align: center;">
+    <button class="otree-btn-next btn btn-primary">我準備好了，開始第一階段</button>
+</div>
+<style>
+/* 1. 放大整個網頁的預設字體與行距 */
+body {
+    font-size: 1.15rem !important; 
+    line-height: 1.7 !important;   
+    color: #333333 !important;     
+}
+
+/* 2. 讓按鈕的字體也跟著長大 */
+.btn {
+    font-size: 1.15rem !important;
+    padding: 10px 20px !important; 
+}
+
+/* 3. 讓所有輸入框跟下拉式選單也一起變清楚 */
+input, select, textarea {
+    font-size: 1.1rem !important;
+}
+
+/* 4. 微調一下標題的大小，讓版面更有層次 */
+h4, h5, label {
+    line-height: 1.5 !important;
+    margin-bottom: 10px !important;
+    font-size: 1.15rem !important;
+}
+</style>
+{{ endblock }}

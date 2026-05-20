@@ -1,0 +1,464 @@
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+
+<h3 id="dynamic-title" style="color: #000000; text-align: left; margin-bottom: 30px; font-weight: bold;"></h3>
+
+<div id="container-house-intro" class="step-container step-intro" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">囤房稅的初衷與爭議</h4>
+        <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，針對「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>針對持有四戶以上非自住房屋者制定「差別稅率」，持有的房子越多，稅率就越高。</li>
+            <li><strong>支持方：</strong>期望透過稅收干預，有效抑制房地產過度炒作與囤積現象。</li>
+            <li><strong>反對方：</strong>擔憂政府過度干預自由市場，且房東或建商可能將稅金轉嫁給租客或買家。</li>
+        </ul>
+    </div>
+    <div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+        <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+        <p style="margin-bottom: 10px;">根據上文，台北市針對「第四棟非自住住宅」所課徵的囤房稅率為多少？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+            <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="1.5"> 1.5%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="2.4"> 2.4%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="3.8"> 3.8%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_house" value="5.2"> 5.2%</label>
+        </div>
+        <p id="quiz-error-house" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+    </div>
+    <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+    <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('house')">下一頁</button>
+</div>
+
+<div id="container-house-survey" class="step-container step-survey" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">囤房稅的初衷與爭議</h4>
+        <p>為落實居住正義並改善空屋囤積，政府推動「囤房稅」，期望藉由提高四戶房屋以上持有者的稅金，促使空屋釋出市場。台北市在新法規下，針對「第四棟非自住住宅」所課徵的稅率為 <strong>3.8%</strong>，且稅率會隨著持有房屋的數量而提高。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>針對持有四戶以上非自住房屋者制定「差別稅率」，持有的房子越多，稅率就越高。</li>
+            <li><strong>支持方：</strong>期望透過稅收干預，有效抑制房地產過度炒作與囤積現象。</li>
+            <li><strong>反對方：</strong>擔憂政府過度干預自由市場，且房東或建商可能將稅金轉嫁給租客或買家。</li>
+        </ul>
+    </div>
+    <div style="margin-bottom: 25px;">
+        <span style="color: #888; font-size: 0.9em;">＊本頁內容沒有標準答案，您也無需考量現實法規的上下限</span>
+        <label style="font-weight: bold; margin-bottom: 10px; display: block; margin-top: 15px;">1. 針對位於台北市的第四棟非自住住宅，請問您認為需徵收多少囤房稅率？</label>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="width: 150px;">{{ form.初始囤房稅 }}</div>
+            <span style="margin-left: 10px; font-weight: 500;">%</span>
+        </div>
+        {{ formfield_errors '初始囤房稅' }}
+        
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持在現行制度下再調漲全國囤房稅？</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始囤房稅態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        </div>
+        {{ formfield_errors '初始囤房稅態度' }}
+    </div>
+    <div style="margin-bottom: 50px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意囤房稅議題？</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始囤房稅重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        </div>
+        {{ formfield_errors '初始囤房稅重要性' }}
+    </div>
+    <div style="text-align: center;">
+        <p id="survey-error-house" style="color: #e74c3c; font-weight: bold; display: none; margin-bottom: 15px;"></p>
+        <button type="button" class="survey-next-btn btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="validateCurrentSurvey()">確認送出，前往下一頁</button>
+    </div>
+</div>
+
+<div id="container-urban-intro" class="step-container step-intro" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">下修都更門檻的背景與爭議</h4>
+        <p>台灣老舊房屋眾多，為加速改善居住安全與市容，社會長期呼籲推動都市更新。然而，以台北市為例，由政府領導的公辦都更必須取得至少 <strong>90%</strong> 的居民同意才能執行，導致許多老屋都更案停滯不前。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>下修都市更新的法定同意門檻比例。區域內只需更少的居民同意，即可啟動強制性的老屋重建。</li>
+            <li><strong>支持方：</strong>能有效加速整頓老舊市容，解決危老建築的公共安全隱患，提升整體的城市美學與生活品質。</li>
+            <li><strong>反對方：</strong>擔憂嚴重侵蝕私人產權。不同意改建的少數屋主將失去對自有房屋的保留權，甚至可能因多數決而遭到強制拆遷。</li>
+        </ul>
+    </div>
+    <div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+        <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+        <p style="margin-bottom: 10px;">根據上文，目前台北市內政府領導的「公辦都更」必須取得至少多少比例的居民同意才能執行？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+            <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="70"> 70%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="80"> 80%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="85"> 85%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_urban" value="90"> 90%</label>
+        </div>
+        <p id="quiz-error-urban" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+    </div>
+    <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+    <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('urban')">下一頁</button>
+</div>
+
+<div id="container-urban-survey" class="step-container step-survey" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">下修都更門檻的背景與爭議</h4>
+        <p>台灣老舊房屋眾多，為加速改善居住安全與市容，社會長期呼籲推動都市更新。然而，以台北市為例，由政府領導的公辦都更必須取得至少 <strong>90%</strong> 的居民同意才能執行，導致許多老屋都更案停滯不前。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>下修都市更新的法定同意門檻比例。區域內只需更少的居民同意，即可啟動強制性的老屋重建。</li>
+            <li><strong>支持方：</strong>能有效加速整頓老舊市容，解決危老建築的公共安全隱患，提升整體的城市美學與生活品質。</li>
+            <li><strong>反對方：</strong>擔憂嚴重侵蝕私人產權。不同意改建的少數屋主將失去對自有房屋的保留權，甚至可能因多數決而遭到強制拆遷。</li>
+        </ul>
+    </div>
+    <div style="margin-bottom: 25px;">
+        <span style="color: #888; font-size: 0.9em;">＊本頁內容沒有標準答案，您也無需考量現實法規的上下限</span>
+        <label style="font-weight: bold; margin-bottom: 10px; display: block; margin-top: 15px;">1. 針對台北市的住宅，請問您認為最低需要取得該區多少比例的居民同意，就可以執行公辦都更？</label>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="width: 150px;">{{ form.初始景觀同意門檻 }}</div>
+            <span style="margin-left: 10px; font-weight: 500;">%</span>
+        </div>
+        {{ formfield_errors '初始景觀同意門檻' }}
+        
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持降低房屋都更同意門檻?</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始景觀法態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        </div>
+        {{ formfield_errors '初始景觀法態度' }}
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意都市更新議題？</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始景觀法重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        </div>
+        {{ formfield_errors '初始景觀法重要性' }}
+    </div>
+    <div style="text-align: center;">
+        <p id="survey-error-urban" style="color: #e74c3c; font-weight: bold; display: none; margin-bottom: 15px;"></p>
+        <button type="button" class="survey-next-btn btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="validateCurrentSurvey()">確認送出，前往下一頁</button>
+    </div>
+</div>
+
+<div id="container-aplus-intro" class="step-container step-intro" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">分數通膨與A+比例限制</h4>
+        <p>近年來大學分數通膨嚴重，成績單失去鑑別度。以台大為例，111 學年度平均 A+ 比例約為 <strong>31%</strong>。為恢復成績的客觀性，台大與部分學校已開始研擬「限制 A+ 比例」政策。雖然台大目前尚未全面強制規定，但已有部分教師自行訂定嚴格的 A+ 名額配給。</p>
+        <p>政策重點與爭議：</p>
+        <ul>
+            <li><strong>作法：</strong>針對課程設定 A+ 名額上限，或提高 A+ 的評分標準。</li>
+            <li><strong>支持方：</strong>認為能確保成績真實反映學習表現、提高成績單可信度。</li>
+            <li><strong>反對方：</strong>擔憂引發同學間惡性競爭，並影響未來出國留學與求職的優勢。</li>
+        </ul>
+    </div>
+    <div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+        <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+        <p style="margin-bottom: 10px;">根據上文，以台大 111 學年度平均 A+ 比例約為多少？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+            <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="15"> 15%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="20"> 20%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="31"> 31%</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_aplus" value="45"> 45%</label>
+        </div>
+        <p id="quiz-error-aplus" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+    </div>
+    <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+    <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('aplus')">下一頁</button>
+</div>
+
+<div id="container-aplus-survey" class="step-container step-survey" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">分數通膨與A+比例限制</h4>
+        <p>近年來大學分數通膨嚴重，成績單失去鑑別度。以台大為例，111 學年度平均 A+ 比例約為 <strong>31%</strong>。為恢復成績的客觀性，台大與部分學校已開始研擬「限制 A+ 比例」政策。雖然台大目前尚未全面強制規定，但已有部分教師自行訂定嚴格的 A+ 名額配給。</p>
+        <p>政策重點與爭議：</p>
+        <ul>
+            <li><strong>作法：</strong>針對課程設定 A+ 名額上限，或提高 A+ 的評分標準。</li>
+            <li><strong>支持方：</strong>認為能確保成績真實反映學習表現、提高成績單可信度。</li>
+            <li><strong>反對方：</strong>擔憂引發同學間惡性競爭，並影響未來出國留學與求職的優勢。</li>
+        </ul>
+    </div>
+    <div style="margin-bottom: 25px;">
+        <span style="color: #888; font-size: 0.9em;">＊本頁內容沒有標準答案，您也無需考量現實法規的上下限</span>
+        <label style="font-weight: bold; margin-bottom: 10px; display: block; margin-top: 15px;">1. 針對國立臺灣大學，請問您認為課程的平均A+比例上限應該多少才合理？</label>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="width: 150px;">{{ form.初始A加比例 }}</div>
+            <span style="margin-left: 10px; font-weight: 500;">%</span>
+        </div>
+        {{ formfield_errors '初始A加比例' }}
+        
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持制定更嚴格的A+標準?</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始A加限制態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        </div>
+        {{ formfield_errors '初始A加限制態度' }}
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">3.  請問您有多在意A+標準議題？</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始A加限制重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        </div>
+        {{ formfield_errors '初始A加限制重要性' }}
+    </div>
+    <div style="text-align: center;">
+        <p id="survey-error-aplus" style="color: #e74c3c; font-weight: bold; display: none; margin-bottom: 15px;"></p>
+        <button type="button" class="survey-next-btn btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="validateCurrentSurvey()">確認送出，前往下一頁</button>
+    </div>
+</div>
+
+<div id="container-credit-intro" class="step-container step-intro" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">探索學分制度與爭議</h4>
+        <p>為了鼓勵跨領域學習，台大推動探索學分制度。學生可將部分課程評分改為「通過／不通過」，及格即可取得學分且不計入 GPA。目前規範每學期最多可申請 <strong>6 學分</strong>，校方對是否提供更多探索學分仍在商議中。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>增加更多探索額度，提供容錯空間，讓學習嘗試不影響整體的 GPA 表現。</li>
+            <li><strong>支持方：</strong>讓學生能勇敢踏出舒適圈，純粹為興趣而學，減輕成績壓力。</li>
+            <li><strong>反對方：</strong>擔憂制度淪為美化 GPA 的工具，且學生可能因不計分而降低對課程的投入感。</li>
+        </ul>
+    </div>
+    <div style="background-color: #ffffff; padding: 20px; border: 2px dashed #D87093; border-radius: 12px; margin-bottom: 20px;">
+        <h5 style="color: #D87093; font-weight: bold; margin-bottom: 15px;">小測驗</h5>
+        <p style="margin-bottom: 10px;">根據上文，台大目前規範每學期最多可申請多少探索學分？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-left: 10px;">
+            <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="3"> 3 學分</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="6"> 6 學分</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="9"> 9 學分</label>
+            <label style="cursor: pointer;"><input type="radio" name="quiz_credit" value="12"> 12 學分</label>
+        </div>
+        <p id="quiz-error-credit" style="color: #e74c3c; font-weight: bold; display: none; margin-top: 15px;">請再仔細看看上面的文章敘述唷!</p>
+    </div>
+    <p>請詳細閱讀並答對測驗後，點擊下一頁繼續進行意見調查。</p>
+    <button type="button" class="btn btn-primary" onclick="verifyQuizAndNext('credit')">下一頁</button>
+</div>
+
+<div id="container-credit-survey" class="step-container step-survey" style="display: none;">
+    <div style="background-color: #F5F5F5; padding: 25px; border-radius: 12px; margin-bottom: 20px; line-height: 1.8;">
+        <h4 style="color: #D87093; font-size: 1.15rem !important; font-weight: bold; margin-bottom: 15px;">探索學分制度與爭議</h4>
+        <p>為了鼓勵跨領域學習，台大推動探索學分制度。學生可將部分課程評分改為「通過／不通過」，及格即可取得學分且不計入 GPA。目前規範每學期最多可申請 <strong>6 學分</strong>，校方對是否提供更多探索學分仍在商議中。</p>
+        <p>政策重點與正反意見：</p>
+        <ul>
+            <li><strong>作法：</strong>增加更多探索額度，提供容錯空間，讓學習嘗試不影響整體的 GPA 表現。</li>
+            <li><strong>支持方：</strong>讓學生能勇敢踏出舒適圈，純粹為興趣而學，減輕成績壓力。</li>
+            <li><strong>反對方：</strong>擔憂制度淪為美化 GPA 的工具，且學生可能因不計分而降低對課程的投入感。</li>
+        </ul>
+    </div>
+    <div style="margin-bottom: 25px;">
+        <span style="color: #888; font-size: 0.9em;">＊本頁內容沒有標準答案，您也無需考量現實法規的上下限</span>
+        <label style="font-weight: bold; margin-bottom: 10px; display: block; margin-top: 15px;">1. 針對國立臺灣大學，請問您認為每學期應該給予多少探索學分的機會？</label>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="width: 150px;">{{ form.初始探索學分 }}</div>
+            <span style="margin-left: 10px; font-weight: 500;">學分</span>
+        </div>
+        {{ formfield_errors '初始探索學分' }}
+        
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">2. 請問您有多支持開放更多探索學分?</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常反對</span>{{ form.初始探索學分態度 }}<span style="font-weight: bold; color: #555;">非常支持</span>
+        </div>
+        {{ formfield_errors '初始探索學分態度' }}
+    </div>
+    <div style="margin-bottom: 30px;">
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">3. 請問您有多在意探索學分議題？</label>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <span style="font-weight: bold; color: #555;">非常不在意</span>{{ form.初始探索學分重要性 }}<span style="font-weight: bold; color: #555;">非常在意</span>
+        </div>
+        {{ formfield_errors '初始探索學分重要性' }}
+    </div>
+    <div style="text-align: center;">
+        <p id="survey-error-credit" style="color: #e74c3c; font-weight: bold; display: none; margin-bottom: 15px;"></p>
+        <button type="button" class="survey-next-btn btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="validateCurrentSurvey()">確認送出，前往下一頁</button>
+    </div>
+</div>
+
+<div id="global-submit-container" style="display: none; text-align: center; margin-top: 40px;">
+    <button type="button" class="btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="submitForm()">確認修改並送出</button>
+</div>
+
+
+<script>
+    const topics = ['house', 'urban', 'aplus', 'credit'];
+    const correctAnswers = {
+        'house': '3.8',
+        'urban': '90',
+        'aplus': '31',
+        'credit': '6'
+    };
+    
+    // 定義每一組意見調查的必填欄位
+    const requiredFields = {
+        'house': ['初始囤房稅', '初始囤房稅態度', '初始囤房稅重要性'],
+        'urban': ['初始景觀同意門檻', '初始景觀法態度', '初始景觀法重要性'],
+        'aplus': ['初始A加比例', '初始A加限制態度', '初始A加限制重要性'],
+        'credit': ['初始探索學分', '初始探索學分態度', '初始探索學分重要性']
+    };
+    
+    const topicTitles = {
+        'house': '議題背景介紹：什麼是囤房稅？',
+        'urban': '議題背景介紹：什麼是下修都更門檻？',
+        'aplus': '議題背景介紹：什麼是A+比例限制？',
+        'credit': '議題背景介紹：什麼是探索學分？'
+    };
+    const surveyTitles = {
+        'house': '囤房稅意見調查',
+        'urban': '都市更新意見調查',
+        'aplus': 'A+ 比例意見調查',
+        'credit': '探索學分意見調查'
+    };
+
+    // 洗牌機制
+    let order = sessionStorage.getItem('preTestOrder');
+    if (!order) {
+        let arr = ['house', 'urban', 'aplus', 'credit'];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        order = JSON.stringify(arr);
+        sessionStorage.setItem('preTestOrder', order);
+    }
+    
+    let topicOrder = JSON.parse(order);
+    let currentTopicIndex = 0;
+    let currentStep = 'intro';
+
+    function showCurrent() {
+        document.querySelectorAll('.step-container').forEach(el => el.style.display = 'none');
+        
+        let currentTopic = topicOrder[currentTopicIndex];
+        let currentId = `container-${currentTopic}-${currentStep}`;
+        
+        document.getElementById(currentId).style.display = 'block';
+        
+        let titleEl = document.getElementById('dynamic-title');
+        if(currentStep === 'intro') {
+            titleEl.innerText = topicTitles[currentTopic];
+        } else {
+            titleEl.innerText = surveyTitles[currentTopic];
+        }
+        
+        window.scrollTo(0, 0);
+    }
+
+    function verifyQuizAndNext(topic) {
+        let selected = document.querySelector(`input[name="quiz_${topic}"]:checked`);
+        let errorMsg = document.getElementById(`quiz-error-${topic}`);
+        
+        if (!selected) {
+            errorMsg.innerText = "請先回答小測驗才能進入下一頁唷！";
+            errorMsg.style.display = "block";
+        } else if (selected.value !== correctAnswers[topic]) {
+            errorMsg.innerText = "請再仔細看看上面的文章敘述唷！";
+            errorMsg.style.display = "block";
+        } else {
+            errorMsg.style.display = "none";
+            currentStep = 'survey';
+            showCurrent();
+        }
+    }
+
+    function validateCurrentSurvey() {
+        let currentTopic = topicOrder[currentTopicIndex];
+        let fields = requiredFields[currentTopic];
+        let allFilled = true;
+
+        for (let fieldName of fields) {
+            let inputs = document.getElementsByName(fieldName);
+            if (inputs.length === 0) continue;
+
+            if (inputs[0].type === 'radio') {
+                let isChecked = false;
+                for(let el of inputs) {
+                    if(el.checked) isChecked = true;
+                }
+                if (!isChecked) allFilled = false;
+            } else {
+                // 如果是填寫數字/文字的輸入框
+                if (inputs[0].value.trim() === '') allFilled = false;
+            }
+        }
+
+        let errorMsgEl = document.getElementById(`survey-error-${currentTopic}`);
+        if (!allFilled) {
+            errorMsgEl.innerText = "請完整填寫所有問題唷！";
+            errorMsgEl.style.display = 'block';
+        } else {
+            errorMsgEl.style.display = 'none';
+            nextTopic(); 
+        }
+    }
+
+    function nextTopic() {
+        if (currentTopicIndex < 3) {
+            currentTopicIndex++;
+            currentStep = 'intro';
+            showCurrent();
+        } else {
+            submitForm();
+        }
+    }
+
+    function submitForm() {
+        sessionStorage.removeItem('preTestOrder');
+        document.getElementById('form').submit();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let hasErrors = document.querySelectorAll('.otree-form-errors, .is-invalid, .invalid-feedback').length > 0;
+        
+        if (hasErrors) {
+            document.querySelectorAll('.step-intro').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.step-survey').forEach(el => el.style.display = 'block');
+            document.getElementById('dynamic-title').innerText = "⚠️ 發現未填寫的題目，請補齊後再送出";
+            
+            document.querySelectorAll('.survey-next-btn').forEach(el => el.style.display = 'none');
+            document.getElementById('global-submit-container').style.display = 'block';
+        } else {
+            showCurrent();
+        }
+    });
+</script>
+
+<style>
+    /* 移除掉原本針對 h4 會蓋掉設定的規則 */
+    h5, label {
+        line-height: 1.5 !important;
+        margin-bottom: 10px !important;
+        font-size: 1.15rem !important;
+    }
+
+    .form-check-inline {
+        display: inline-flex !important;
+        flex-direction: column-reverse !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 6px !important;
+    }
+    .form-check-label {
+        font-weight: 500;
+        color: #666 !important;
+        margin-left: 0 !important;
+        cursor: pointer;
+    }
+    .form-check-input {
+        margin: 0 !important;
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+    body {
+        font-size: 1.15rem !important; 
+        line-height: 1.7 !important;   
+        color: #333333 !important;     
+    }
+    .btn {
+        font-size: 1.15rem !important;
+        padding: 10px 20px !important; 
+    }
+    input, select, textarea {
+        font-size: 1.1rem !important;
+    }
+</style>
+
+{{ endblock }}

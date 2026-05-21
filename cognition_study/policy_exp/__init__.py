@@ -39,21 +39,25 @@ class Subsession(BaseSubsession):
 
 def creating_session(subsession: Subsession):
     for player in subsession.get_players():
-        player.失調組別 = random.choice(['失調組', '中性組'])
-        player.推理組別 = random.choice(['動機性推理組', '中性推理組'])
-        player.失調組別2 = random.choice(['失調組2', '中性組2'])
-        player.推理組別2 = random.choice(['動機性推理組2', '中性推理組2'])
+        # 讀取 settings.py 傳進來的點餐單 (config)
+        config = subsession.session.config
+        
+        # 優先讀取外部參數，如果沒有設定參數，就維持妳原本的 random.choice！
+        player.失調組別 = config.get('dissonance_1', random.choice(['失調組', '中性組']))
+        player.推理組別 = config.get('reasoning_1', random.choice(['動機性推理組', '中性推理組']))
+        player.失調組別2 = config.get('dissonance_2', random.choice(['失調組2', '中性組2']))
+        player.推理組別2 = config.get('reasoning_2', random.choice(['動機性推理組2', '中性推理組2']))
 
+        # 底下的個人隨機項目保持原樣，不影響！
         論點順序 = [1, 2, 3, 4]
         random.shuffle(論點順序)
         player.participant.vars['論點順序'] = 論點順序
         
-
         政見列表 = ['完全廢除景觀法', '建立更嚴格的景觀法']
         random.shuffle(政見列表)
         player.候選人A_景觀法政見 = 政見列表[0]
         player.候選人B_景觀法政見 = 政見列表[1]
-
+        
 class Group(BaseGroup):
     pass
 

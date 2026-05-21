@@ -4,7 +4,7 @@ SESSION_CONFIGS = [
     dict(
         name='full_experiment',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
-        num_demo_participants=10,
+        num_demo_participants=20,
         display_name='正式實驗:認知失調與動機性推理_隨機'
     ),
 
@@ -12,7 +12,7 @@ SESSION_CONFIGS = [
     dict(
         name='full_experiment_01',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
-        num_demo_participants=10,
+        num_demo_participants=20,
         display_name='正式實驗:認知失調與動機性推理_A"B"',
         dissonance_1='中性組',
         reasoning_1='中性推理組',
@@ -23,7 +23,7 @@ SESSION_CONFIGS = [
     dict(
         name='full_experiment_02',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
-        num_demo_participants=10,
+        num_demo_participants=20,
         display_name='正式實驗:認知失調與動機性推理_A"B',
         dissonance_1='中性組',
         reasoning_1='動機性推理組',
@@ -34,7 +34,7 @@ SESSION_CONFIGS = [
     dict(
         name='full_experiment_03',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
-        num_demo_participants=10,
+        num_demo_participants=20,
         display_name='正式實驗:認知失調與動機性推理_AB"',
         dissonance_1='失調組',
         reasoning_1='中性推理組',
@@ -45,7 +45,7 @@ SESSION_CONFIGS = [
     dict(
         name='full_experiment_04',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
-        num_demo_participants=10,
+        num_demo_participants=20,
         display_name='正式實驗:認知失調與動機性推理_AB',
         dissonance_1='失調組',
         reasoning_1='動機性推理組',
@@ -56,7 +56,7 @@ SESSION_CONFIGS = [
     dict(
         name='policy_exp_only',
         app_sequence=['policy_exp'],
-        num_demo_participants=1,
+        num_demo_participants=20,
         display_name='主實驗'
     ),
     
@@ -64,7 +64,7 @@ SESSION_CONFIGS = [
     dict(
         name='start',
         app_sequence=['Stage_Payment_Info'],
-        num_demo_participants=1,
+        num_demo_participants=20,
         display_name='開場'
     ),
     

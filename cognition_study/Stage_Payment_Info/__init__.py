@@ -6,7 +6,8 @@ class C(BaseConstants):
     NUM_ROUNDS = 1
 
 class Player(BasePlayer):
-    total_payment = models.IntegerField()
+    total_payment = models.IntegerField(initial=150)
+    
     # === 基本資料 ===
     name = models.StringField(label="您的名字")
     school = models.StringField(
@@ -67,8 +68,13 @@ class Intro2(Page):
 
 class Intro3(Page):
     pass
+
 class 等(Page):
     pass
+
+class 收據前一頁(Page):
+    pass
+
 class BasicInfo(Page):
     form_model = 'player'
     form_fields = [
@@ -107,5 +113,4 @@ class BasicInfo(Page):
                 return '請選擇是否在台滿 183 天'
 
 
-
-page_sequence = [ WaitStart,Intro1, Intro2, Intro3,BasicInfo,等]
+page_sequence = [ WaitStart,收據前一頁,BasicInfo,等]

@@ -1,0 +1,41 @@
+{{ block title }}
+{{ endblock }}
+
+{{ block content }}
+<div style="background-color: #FFFFFF; color: #000000; padding: 20px; line-height: 1.8; font-size: 1.15rem;">
+    
+    <h3 style="font-weight: bold; margin-bottom: 25px; text-align: center;">收據資料填寫注意事項</h3>
+    
+    <p>實驗開始前，我們將請您填寫領取實驗車馬費所需的收據資料。</p>
+    
+    <p>為了確保後續核銷流程順利，請您務必遵守以下兩項重要規定：</p>
+    
+    <ul style="margin-top: 15px; margin-bottom: 25px;">
+        <li style="margin-bottom: 15px;">
+            <strong>身分證字號首字母必須大寫：</strong><br>
+            例如：請填寫 <span style="text-decoration: underline;">A</span>123456789，勿填寫小寫 a123456789。
+        </li>
+        <li style="margin-bottom: 15px;">
+            <strong>戶籍地址必須照抄身分證背面：</strong><br>
+            請拿出您的身分證，確認背面的地址。填寫的內容必須與身分證背面<strong>一模一樣</strong> ，如有「鄰」與「里」，也務必填寫。
+        </li>
+    </ul>
+
+
+
+</div>
+
+
+<style>
+    /* 強制整個頁面背景白底、文字黑字 */
+    body { 
+        background-color: #FFFFFF !important; 
+        color: #000000 !important; 
+    }
+    /* 讓按鈕滑鼠游標移過去時變成深灰色，維持簡約感 */
+    .btn-primary:hover {
+        background-color: #333333 !important;
+        border-color: #333333 !important;
+    }
+</style>
+{{ endblock }}

@@ -45,8 +45,6 @@ def creating_session(subsession: Subsession):
         # 優先讀取外部參數，如果沒有設定參數，就維持妳原本的 random.choice！
         player.失調組別 = config.get('dissonance_1', random.choice(['失調組', '中性組']))
         player.推理組別 = config.get('reasoning_1', random.choice(['動機性推理組', '中性推理組']))
-        player.失調組別2 = config.get('dissonance_2', random.choice(['失調組2', '中性組2']))
-        player.推理組別2 = config.get('reasoning_2', random.choice(['動機性推理組2', '中性推理組2']))
 
         # 底下的個人隨機項目保持原樣，不影響！
         論點順序 = [1, 2, 3, 4]
@@ -57,15 +55,13 @@ def creating_session(subsession: Subsession):
         random.shuffle(政見列表)
         player.候選人A_景觀法政見 = 政見列表[0]
         player.候選人B_景觀法政見 = 政見列表[1]
-        
+
 class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
     失調組別 = models.StringField()
     推理組別 = models.StringField()
-    失調組別2 = models.StringField()
-    推理組別2 = models.StringField()
     年齡 = models.IntegerField(label='請問您今年幾歲?', min=13, max=125)
     性別 = models.StringField(
         choices=[['男', '男'], ['女', '女']],
@@ -386,12 +382,12 @@ class 景觀法投票選擇(Page):
 class A加選舉情境介紹(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '失調組2'
+        return player.失調組別 == '失調組'
 
 class A加候選人政見(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '失調組2'
+        return player.失調組別 == '失調組'
     @staticmethod
     def vars_for_template(player: Player):
         低比例, 高比例 = get_a_plus_rates(player)
@@ -403,7 +399,7 @@ class A加投票選擇(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '失調組2'
+        return player.失調組別 == '失調組'
     @staticmethod
     def vars_for_template(player: Player):
         低比例, 高比例 = get_a_plus_rates(player)
@@ -412,12 +408,12 @@ class A加投票選擇(Page):
 class 探索學分選舉情境介紹(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '中性組2'
+        return player.失調組別 == '中性組'
 
 class 探索學分候選人政見(Page):
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '中性組2'
+        return player.失調組別 == '中性組'
     @staticmethod
     def vars_for_template(player: Player):
         低學分, 高學分 = get_credit(player)
@@ -429,7 +425,7 @@ class 探索學分投票選擇(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '中性組2'
+        return player.失調組別 == '中性組'
     @staticmethod
     def vars_for_template(player: Player):
         低學分, 高學分 = get_credit(player)
@@ -542,7 +538,7 @@ class A加寫作(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '失調組2'
+        return player.失調組別 == '失調組'
         
     @staticmethod
     def vars_for_template(player: Player):
@@ -571,7 +567,7 @@ class 探索學分寫作(Page):
     
     @staticmethod
     def is_displayed(player: Player):
-        return player.失調組別2 == '中性組2'
+        return player.失調組別 == '中性組'
         
     @staticmethod
     def vars_for_template(player: Player):
@@ -721,7 +717,7 @@ class 論點頁面一2(Page):
     template_name = 'policy_exp/論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '動機性推理組2'
+        return player.推理組別 == '動機性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
@@ -736,7 +732,7 @@ class 論點頁面二2(Page):
     template_name = 'policy_exp/論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '動機性推理組2'
+        return player.推理組別 == '動機性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
@@ -751,7 +747,7 @@ class 論點頁面三2(Page):
     template_name = 'policy_exp/論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '動機性推理組2'
+        return player.推理組別 == '動機性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
@@ -766,7 +762,7 @@ class 論點頁面四2(Page):
     template_name = 'policy_exp/論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '動機性推理組2'
+        return player.推理組別 == '動機性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
@@ -781,7 +777,7 @@ class 景觀論點頁面一2(Page):
     template_name = 'policy_exp/景觀論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '中性推理組2'
+        return player.推理組別 == '中性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
@@ -796,7 +792,7 @@ class 景觀論點頁面二2(Page):
     template_name = 'policy_exp/景觀論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '中性推理組2'
+        return player.推理組別 == '中性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
@@ -811,7 +807,7 @@ class 景觀論點頁面三2(Page):
     template_name = 'policy_exp/景觀論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '中性推理組2'
+        return player.推理組別 == '中性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
@@ -826,7 +822,7 @@ class 景觀論點頁面四2(Page):
     template_name = 'policy_exp/景觀論點評分2.html'
     @staticmethod
     def is_displayed(player: Player):
-        return player.推理組別2 == '中性推理組2'
+        return player.推理組別 == '中性推理組'
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
@@ -835,6 +831,9 @@ class 景觀論點頁面四2(Page):
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][3]
         return dict(論點內容=C.景觀論點列表2[編號-1])
+class 報酬(Page):
+    pass
+
 
 page_sequence = [
     第一階段介紹,前測,
@@ -846,6 +845,6 @@ page_sequence = [
     景觀論點頁面一,景觀論點頁面二,景觀論點頁面三,景觀論點頁面四, 
     論點頁面一2,論點頁面二2,論點頁面三2,論點頁面四2,
     景觀論點頁面一2,景觀論點頁面二2,景觀論點頁面三2,景觀論點頁面四2,
-    第四階段介紹,後測,人口背景調查,
+    第四階段介紹,後測,人口背景調查,報酬,
 ]
 

@@ -60,15 +60,6 @@ class Consent(Page):
 class WaitStart(Page):
     form_model = None
 
-class Intro1(Page):
-    pass
-
-class Intro2(Page):
-    pass
-
-class Intro3(Page):
-    pass
-
 class 等(Page):
     pass
 
@@ -113,4 +104,4 @@ class BasicInfo(Page):
                 return '請選擇是否在台滿 183 天'
 
 
-page_sequence = [ WaitStart,收據前一頁,BasicInfo,等]
+page_sequence = [ WaitStart,Consent,收據前一頁,BasicInfo,等]

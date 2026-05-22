@@ -8,7 +8,7 @@ SESSION_CONFIGS = [
         display_name='正式實驗:認知失調與動機性推理_隨機'
     ),
 
-    # 1. 囤房稅、A+、囤房稅、A+
+  
     dict(
         name='full_experiment_01',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
@@ -19,7 +19,7 @@ SESSION_CONFIGS = [
      
     ),
 
-    # 2. 囤房稅、A+、囤房稅、探索學分
+  
     dict(
         name='full_experiment_02',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
@@ -30,7 +30,6 @@ SESSION_CONFIGS = [
    
     ),
 
-    # 3. 囤房稅、A+、都更、A+
     dict(
         name='full_experiment_03',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],
@@ -41,7 +40,6 @@ SESSION_CONFIGS = [
   
     ),
 
-    # 4. 囤房稅、A+、都更、探索學分
     dict(
         name='full_experiment_04',
         app_sequence=['Stage_Payment_Info', 'policy_exp'],

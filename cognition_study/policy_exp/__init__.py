@@ -210,31 +210,6 @@ class 後測(Page):
         '最終A加比例', '最終A加限制態度', '最終A加限制重要性',
         '最終探索學分', '最終探索學分態度', '最終探索學分重要性'
     ]
-class 前測1(Page):
-    form_model = 'player'
-    form_fields = ['初始囤房稅', '初始囤房稅態度', '初始囤房稅重要性']
-class 前測2(Page):
-    form_model = 'player'
-    form_fields = ['初始景觀同意門檻', '初始景觀法態度', '初始景觀法重要性']
-class 前測3(Page):
-    form_model = 'player'
-    form_fields = ['初始A加比例','初始A加限制態度', '初始A加限制重要性']
-class 前測4(Page):
-    form_model = 'player'
-    form_fields = ['初始探索學分','初始探索學分態度', '初始探索學分重要性']
-
-class 後測1(Page):
-    form_model = 'player'
-    form_fields = ['最終囤房稅', '最終囤房稅態度', '最終囤房稅重要性']
-class 後測2(Page):
-    form_model = 'player'
-    form_fields = ['最終景觀同意門檻', '最終景觀法態度', '最終景觀法重要性']
-class 後測3(Page):
-    form_model = 'player'
-    form_fields = ['最終A加比例','最終A加限制態度', '最終A加限制重要性']
-class 後測4(Page):
-    form_model = 'player'
-    form_fields = ['最終探索學分','最終探索學分態度','最終探索學分重要性']
 
 def get_tax_rates(player):
     if player.初始囤房稅 < 3.8:
@@ -850,6 +825,8 @@ class 景觀論點頁面四2(Page):
 class 報酬(Page):
     pass
 
+class 等(Page):
+    pass
 
 page_sequence = [
     第一階段介紹,前測,
@@ -861,6 +838,6 @@ page_sequence = [
     景觀論點頁面一,景觀論點頁面二,景觀論點頁面三,景觀論點頁面四, 
     論點頁面一2,論點頁面二2,論點頁面三2,論點頁面四2,
     景觀論點頁面一2,景觀論點頁面二2,景觀論點頁面三2,景觀論點頁面四2,
-    第四階段介紹,後測,人口背景調查,報酬,
+    第四階段介紹,後測,人口背景調查,等,報酬,
 ]
 

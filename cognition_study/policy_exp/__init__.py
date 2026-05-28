@@ -194,13 +194,31 @@ class Player(BasePlayer):
     論點3_邏輯性2 = models.IntegerField(choices=C.九階選項, widget=widgets.RadioSelectHorizontal)
     論點4_說服力2 = models.IntegerField(choices=C.九階選項, widget=widgets.RadioSelectHorizontal)
     論點4_邏輯性2 = models.IntegerField(choices=C.九階選項, widget=widgets.RadioSelectHorizontal)
+    前測時間 = models.FloatField(blank=True, initial=0)
+    看政見時間 = models.FloatField(blank=True, initial=0)
+    寫作時間 = models.FloatField(blank=True, initial=0)
+    看政見時間2 = models.FloatField(blank=True, initial=0)
+    寫作時間2 = models.FloatField(blank=True, initial=0)
+    論點1時間 = models.FloatField(blank=True, initial=0)
+    論點2時間 = models.FloatField(blank=True, initial=0)
+    論點3時間 = models.FloatField(blank=True, initial=0)
+    論點4時間 = models.FloatField(blank=True, initial=0)
+    論點1時間2 = models.FloatField(blank=True, initial=0)
+    論點2時間2 = models.FloatField(blank=True, initial=0)
+    論點3時間2 = models.FloatField(blank=True, initial=0)
+    論點4時間2 = models.FloatField(blank=True, initial=0)
+    後測時間 = models.FloatField(blank=True, initial=0)
+
+
+
+
 class 前測(Page):
     form_model = 'player'
     form_fields = [
         '初始囤房稅', '初始囤房稅態度', '初始囤房稅重要性',
         '初始景觀同意門檻', '初始景觀法態度', '初始景觀法重要性',
         '初始A加比例', '初始A加限制態度', '初始A加限制重要性',
-        '初始探索學分', '初始探索學分態度', '初始探索學分重要性'
+        '初始探索學分', '初始探索學分態度', '初始探索學分重要性','前測時間'
     ]
 class 後測(Page):
     form_model = 'player'
@@ -208,7 +226,7 @@ class 後測(Page):
         '最終囤房稅', '最終囤房稅態度', '最終囤房稅重要性',
         '最終景觀同意門檻', '最終景觀法態度', '最終景觀法重要性',
         '最終A加比例', '最終A加限制態度', '最終A加限制重要性',
-        '最終探索學分', '最終探索學分態度', '最終探索學分重要性'
+        '最終探索學分', '最終探索學分態度', '最終探索學分重要性','後測時間'
     ]
 
 def get_tax_rates(player):
@@ -321,6 +339,8 @@ class 選舉情境介紹(Page):
         return player.失調組別 == '失調組'
 
 class 候選人政見(Page):
+    form_model = 'player'
+    form_fields = ['看政見時間']
     @staticmethod
     def is_displayed(player: Player):
         return player.失調組別 == '失調組'
@@ -350,6 +370,8 @@ class 景觀法選舉情境介紹(Page):
         return player.失調組別 == '中性組'
 
 class 景觀法候選人政見(Page):
+    form_model = 'player'
+    form_fields = ['看政見時間']
     @staticmethod
     def is_displayed(player: Player):
         return player.失調組別 == '中性組'
@@ -376,6 +398,8 @@ class A加選舉情境介紹(Page):
         return player.失調組別 == '失調組'
 
 class A加候選人政見(Page):
+    form_model = 'player'
+    form_fields = ['看政見時間2']
     @staticmethod
     def is_displayed(player: Player):
         return player.失調組別 == '失調組'
@@ -402,6 +426,8 @@ class 探索學分選舉情境介紹(Page):
         return player.失調組別 == '中性組'
 
 class 探索學分候選人政見(Page):
+    form_model = 'player'
+    form_fields = ['看政見時間2']
     @staticmethod
     def is_displayed(player: Player):
         return player.失調組別 == '中性組'
@@ -467,7 +493,7 @@ class 囤房稅選項頁面(Page):
 
 class 囤房稅寫作(Page):
     form_model = 'player'
-    form_fields = ['辯護文章']
+    form_fields = ['辯護文章','寫作時間']
     timeout_seconds = 600
     
     @staticmethod
@@ -495,7 +521,7 @@ class 囤房稅寫作(Page):
 
 class 景觀法寫作(Page):
     form_model = 'player'
-    form_fields = ['景觀法文章']
+    form_fields = ['景觀法文章','寫作時間']
     timeout_seconds = 600
     
     @staticmethod
@@ -524,7 +550,7 @@ class 景觀法寫作(Page):
 
 class A加寫作(Page):
     form_model = 'player'
-    form_fields = ['A加文章']
+    form_fields = ['A加文章','寫作時間2']
     timeout_seconds = 600
     
     @staticmethod
@@ -553,7 +579,7 @@ class A加寫作(Page):
 
 class 探索學分寫作(Page):
     form_model = 'player'
-    form_fields = ['探索學分文章']
+    form_fields = ['探索學分文章','寫作時間2']
     timeout_seconds = 600
     
     @staticmethod
@@ -592,11 +618,11 @@ class 論點頁面一(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點1時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return dict(論點內容=C.論點列表[編號-1])
+        return dict(論點內容=C.論點列表[編號-1], 計時小抄='論點1時間')
 
 class 論點頁面二(Page):
     form_model = 'player'
@@ -607,11 +633,11 @@ class 論點頁面二(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點2時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return dict(論點內容=C.論點列表[編號-1])
+        return dict(論點內容=C.論點列表[編號-1], 計時小抄='論點2時間')
 
 class 論點頁面三(Page):
     form_model = 'player'
@@ -622,11 +648,11 @@ class 論點頁面三(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點3時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return dict(論點內容=C.論點列表[編號-1])
+        return dict(論點內容=C.論點列表[編號-1], 計時小抄='論點3時間')
 
 class 論點頁面四(Page):
     form_model = 'player'
@@ -637,11 +663,11 @@ class 論點頁面四(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點4時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return dict(論點內容=C.論點列表[編號-1])
+        return dict(論點內容=C.論點列表[編號-1], 計時小抄='論點4時間')
     
 class 景觀論點頁面一(Page):
     form_model = 'player'
@@ -652,11 +678,11 @@ class 景觀論點頁面一(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點1時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return dict(論點內容=C.景觀論點列表[編號-1])
+        return dict(論點內容=C.景觀論點列表[編號-1], 計時小抄='論點1時間')
 
 class 景觀論點頁面二(Page):
     form_model = 'player'
@@ -667,11 +693,11 @@ class 景觀論點頁面二(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點2時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return dict(論點內容=C.景觀論點列表[編號-1])
+        return dict(論點內容=C.景觀論點列表[編號-1], 計時小抄='論點2時間')
 
 class 景觀論點頁面三(Page):
     form_model = 'player'
@@ -682,11 +708,11 @@ class 景觀論點頁面三(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點3時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return dict(論點內容=C.景觀論點列表[編號-1])
+        return dict(論點內容=C.景觀論點列表[編號-1], 計時小抄='論點3時間')
 
 class 景觀論點頁面四(Page):
     form_model = 'player'
@@ -697,11 +723,11 @@ class 景觀論點頁面四(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性']
+        return [f'論點{編號}_說服力', f'論點{編號}_邏輯性', '論點4時間']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return dict(論點內容=C.景觀論點列表[編號-1])
+        return dict(論點內容=C.景觀論點列表[編號-1], 計時小抄='論點4時間')
     
 class 論點頁面一2(Page):
     form_model = 'player'
@@ -712,11 +738,11 @@ class 論點頁面一2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點1時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return dict(論點內容=C.論點列表2[編號-1])
+        return dict(論點內容=C.論點列表2[編號-1], 計時小抄='論點1時間2')
 
 class 論點頁面二2(Page):
     form_model = 'player'
@@ -727,11 +753,11 @@ class 論點頁面二2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點2時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return dict(論點內容=C.論點列表2[編號-1])
+        return dict(論點內容=C.論點列表2[編號-1], 計時小抄='論點2時間2')
 
 class 論點頁面三2(Page):
     form_model = 'player'
@@ -742,11 +768,11 @@ class 論點頁面三2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點3時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return dict(論點內容=C.論點列表2[編號-1])
+        return dict(論點內容=C.論點列表2[編號-1], 計時小抄='論點3時間2')
 
 class 論點頁面四2(Page):
     form_model = 'player'
@@ -757,11 +783,11 @@ class 論點頁面四2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點4時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return dict(論點內容=C.論點列表2[編號-1])
+        return dict(論點內容=C.論點列表2[編號-1], 計時小抄='論點4時間2')
     
 class 景觀論點頁面一2(Page):
     form_model = 'player'
@@ -772,11 +798,11 @@ class 景觀論點頁面一2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點1時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][0]
-        return dict(論點內容=C.景觀論點列表2[編號-1])
+        return dict(論點內容=C.景觀論點列表2[編號-1], 計時小抄='論點1時間2')
 
 class 景觀論點頁面二2(Page):
     form_model = 'player'
@@ -787,11 +813,11 @@ class 景觀論點頁面二2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點2時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][1]
-        return dict(論點內容=C.景觀論點列表2[編號-1])
+        return dict(論點內容=C.景觀論點列表2[編號-1], 計時小抄='論點2時間2')
 
 class 景觀論點頁面三2(Page):
     form_model = 'player'
@@ -802,11 +828,11 @@ class 景觀論點頁面三2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點3時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][2]
-        return dict(論點內容=C.景觀論點列表2[編號-1])
+        return dict(論點內容=C.景觀論點列表2[編號-1], 計時小抄='論點3時間2')
 
 class 景觀論點頁面四2(Page):
     form_model = 'player'
@@ -817,11 +843,11 @@ class 景觀論點頁面四2(Page):
     @staticmethod
     def get_form_fields(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2']
+        return [f'論點{編號}_說服力2', f'論點{編號}_邏輯性2', '論點4時間2']
     @staticmethod
     def vars_for_template(player: Player):
         編號 = player.participant.vars['論點順序'][3]
-        return dict(論點內容=C.景觀論點列表2[編號-1])
+        return dict(論點內容=C.景觀論點列表2[編號-1], 計時小抄='論點4時間2')
 class 報酬(Page):
     pass
 

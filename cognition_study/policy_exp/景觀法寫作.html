@@ -100,4 +100,17 @@ h4, h5, label {
     font-size: 1.15rem !important;
 }
 </style>
+</style>
+</style>
+<input type="hidden" name="寫作時間" id="page_timer">
+
+<script>
+    let startTime = Date.now(); // 網頁一打開就按下碼表
+
+    document.getElementById('form').addEventListener('submit', function() {
+        let endTime = Date.now(); // 按下下一頁的瞬間
+        let timeSpent = (endTime - startTime) / 1000; // 算出花了幾秒
+        document.getElementById('page_timer').value = timeSpent; // 填入隱藏框框
+    });
+</script>
 {{ endblock }}

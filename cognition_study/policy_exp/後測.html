@@ -191,8 +191,13 @@
     <button type="button" id="custom-next-btn" class="btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;">下一題</button>
 </div>
 
+<!-- 🌟 補上這個隱藏的計時框框 (記得 models.py 裡要有「後測時間」這個變數喔！) -->
+<input type="hidden" name="後測時間" id="page_timer">
 
 <script>
+    // ⏱️ 網頁一打開，立刻啟動碼表！
+    let startTime = Date.now();
+
     // 定義四個區塊與對應的標題
     const sectionsData = {
         'section-house': '囤房稅意見調查',
@@ -290,6 +295,11 @@
             showCurrentSection();
             window.scrollTo(0, 0); // 跳轉時讓視窗滾回最上面
         } else {
+            // 🌟 登機門一：正常填寫完畢送出前，強制結算時間！
+            let endTime = Date.now(); 
+            let timeSpent = (endTime - startTime) / 1000;
+            document.getElementById('page_timer').value = timeSpent;
+
             // 清除紀錄並送出表單給 oTree
             sessionStorage.removeItem('postTestOrder');
             document.getElementById('form').submit();
@@ -312,6 +322,12 @@
             // 覆蓋按鈕行為，變成直接送出
             btn.addEventListener('click', function(e) {
                 e.stopImmediatePropagation();
+                
+                // 🌟 登機門二：漏填補交送出前，也要結算時間！
+                let endTime = Date.now(); 
+                let timeSpent = (endTime - startTime) / 1000;
+                document.getElementById('page_timer').value = timeSpent;
+
                 sessionStorage.removeItem('postTestOrder');
                 document.getElementById('form').submit();
             });

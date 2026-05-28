@@ -96,4 +96,15 @@ h4, h5, label {
     font-size: 1.15rem !important;
 }
 </style>
+<input type="hidden" name="{{ 計時小抄 }}" id="page_timer">
+
+<script>
+    let startTime = Date.now(); // 網頁一打開就開始計時
+
+    document.getElementById('form').addEventListener('submit', function() {
+        let endTime = Date.now(); 
+        let timeSpent = (endTime - startTime) / 1000; 
+        document.getElementById('page_timer').value = timeSpent; 
+    });
+</script>
 {{ endblock }}

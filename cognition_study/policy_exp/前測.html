@@ -279,6 +279,7 @@
 
 
 <script>
+    let startTime = Date.now();
     const topics = ['house', 'urban', 'aplus', 'credit'];
     const correctAnswers = {
         'house': '3.8',
@@ -402,6 +403,13 @@
 
     function submitForm() {
         sessionStorage.removeItem('preTestOrder');
+        
+        // 🌟 破解大魔王：在表單送出前，強制結算時間！
+        let endTime = Date.now(); 
+        let timeSpent = (endTime - startTime) / 1000; // 算出花了幾秒
+        document.getElementById('page_timer').value = timeSpent; // 填入隱藏框框
+        
+        // 結算完畢，安心送出表單！
         document.getElementById('form').submit();
     }
 
@@ -460,5 +468,8 @@
         font-size: 1.1rem !important;
     }
 </style>
+
+<!-- 記得把這個接時間的隱藏框框補回來唷！ -->
+<input type="hidden" name="前測時間" id="page_timer">
 
 {{ endblock }}

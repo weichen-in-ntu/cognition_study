@@ -1,6 +1,7 @@
 from otree.api import *
 import random
 import time
+import math
 
 class C(BaseConstants):
     NAME_IN_URL = 'policy_cognition'
@@ -116,15 +117,15 @@ class Player(BasePlayer):
     推理組別 = models.StringField()
     
     
-    初始囤房稅 = models.FloatField(label='',min=0)
-    最終囤房稅 = models.FloatField(label='',min=0)
+    初始囤房稅 = models.FloatField(label='',min=0, max=99999)
+    最終囤房稅 = models.FloatField(label='',min=0, max=99999)
     初始景觀同意門檻 = models.FloatField(label='',min=0, max=100)
     最終景觀同意門檻 = models.FloatField(label='',min=0, max=100)
 
     初始A加比例 = models.FloatField(label='',min=0, max=100)
     最終A加比例 = models.FloatField(label='',min=0, max=100)
-    初始探索學分 = models.IntegerField(label='',min=0)
-    最終探索學分 = models.IntegerField(label='',min=0)
+    初始探索學分 = models.IntegerField(label='',min=0, max=99999)
+    最終探索學分 = models.IntegerField(label='',min=0, max=99999)
 
     初始囤房稅態度 = models.IntegerField(choices=C.九階選項, widget=widgets.RadioSelectHorizontal)
     最終囤房稅態度 = models.IntegerField(choices=C.九階選項, widget=widgets.RadioSelectHorizontal)
@@ -309,8 +310,8 @@ def get_credit(player):
             學分一 = player.初始探索學分 * (1/2)
             學分二 = player.初始探索學分 * (5/4)
 
-    低學分 = int(round(min(學分一, 學分二)))
-    高學分 = int(round(max(學分一, 學分二)))
+    低學分 = int(math.floor(min(學分一, 學分二) + 0.5))
+    高學分 = int(math.floor(max(學分一, 學分二) + 0.5))
     return 低學分, 高學分
 
 def get_a_plus_rates(player):

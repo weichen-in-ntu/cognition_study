@@ -385,20 +385,18 @@
     <button type="button" class="btn btn-primary" style="padding: 10px 30px; font-size: 1.2rem;" onclick="submitForm()">確認修改並送出</button>
 </div>
 
-<!-- 🌟 這是用來算錢的 4 個隱形記分板 -->
-<input type="hidden" name="前測囤房稅測驗結果" id="record_house">
-<input type="hidden" name="前測景觀法測驗結果" id="record_urban">
-<input type="hidden" name="前測A加測驗結果" id="record_aplus">
-<input type="hidden" name="前測探索學分測驗結果" id="record_credit">
-
-<!-- 🌟 這是我們新增的 4 個錯誤次數記分板 (預設為0) -->
-<input type="hidden" name="前測囤房稅錯誤次數" id="error_house" value="0">
-<input type="hidden" name="前測景觀法錯誤次數" id="error_urban" value="0">
-<input type="hidden" name="前測A加錯誤次數" id="error_aplus" value="0">
-<input type="hidden" name="前測探索學分錯誤次數" id="error_credit" value="0">
-
-<!-- 記得把這個接時間的隱藏框框補回來唷！ -->
-<input type="hidden" name="前測時間" id="page_timer">
+<!-- 🌟 將所有隱藏資料交給 oTree 的 form 標籤生成，確保重新整理時資料「絕對不會」消失！ -->
+<div style="display: none;">
+    {{ form.前測囤房稅測驗結果 }}
+    {{ form.前測景觀法測驗結果 }}
+    {{ form.前測A加測驗結果 }}
+    {{ form.前測探索學分測驗結果 }}
+    {{ form.前測囤房稅錯誤次數 }}
+    {{ form.前測景觀法錯誤次數 }}
+    {{ form.前測A加錯誤次數 }}
+    {{ form.前測探索學分錯誤次數 }}
+    {{ form.前測時間 }}
+</div>
 
 <script>
     let startTime = Date.now();
@@ -492,10 +490,10 @@
             if (!isScored[topic]) {
                 let score = (selected.value === correctAnswers[topic]) ? 1 : 0;
                 
-                if (topic === 'house') document.getElementById('record_house').value = score;
-                if (topic === 'urban') document.getElementById('record_urban').value = score;
-                if (topic === 'aplus') document.getElementById('record_aplus').value = score;
-                if (topic === 'credit') document.getElementById('record_credit').value = score;
+                if (topic === 'house') document.querySelector('input[name="前測囤房稅測驗結果"]').value = score;
+                if (topic === 'urban') document.querySelector('input[name="前測景觀法測驗結果"]').value = score;
+                if (topic === 'aplus') document.querySelector('input[name="前測A加測驗結果"]').value = score;
+                if (topic === 'credit') document.querySelector('input[name="前測探索學分測驗結果"]').value = score;
                 
                 isScored[topic] = true; // 鎖定這題，之後就算他改對了，也不會再加分！
             }
@@ -506,10 +504,10 @@
                 
                 // 🌟 新增：答錯了！增加這題的錯誤次數，並寫入隱藏的框框裡
                 errorCounts[topic]++;
-                if (topic === 'house') document.getElementById('error_house').value = errorCounts[topic];
-                if (topic === 'urban') document.getElementById('error_urban').value = errorCounts[topic];
-                if (topic === 'aplus') document.getElementById('error_aplus').value = errorCounts[topic];
-                if (topic === 'credit') document.getElementById('error_credit').value = errorCounts[topic];
+                if (topic === 'house') document.querySelector('input[name="前測囤房稅錯誤次數"]').value = errorCounts[topic];
+                if (topic === 'urban') document.querySelector('input[name="前測景觀法錯誤次數"]').value = errorCounts[topic];
+                if (topic === 'aplus') document.querySelector('input[name="前測A加錯誤次數"]').value = errorCounts[topic];
+                if (topic === 'credit') document.querySelector('input[name="前測探索學分錯誤次數"]').value = errorCounts[topic];
                 
             } else {
                 errorMsg.style.display = "none";
@@ -546,8 +544,8 @@
                     
                     // 針對不同的變數，做嚴格的數值檢查
                     if (fieldName === '初始囤房稅') {
-                        if (isNaN(val) || val < 0) {
-                            valueErrorMsg = "囤房稅率請填寫大於等於 0 的數字";
+                        if (isNaN(val) || val < 0 || val > 99999) {
+                            valueErrorMsg = "囤房稅率請填寫 0 到 99999 之間的數字";
                         }
                     } else if (fieldName === '初始景觀同意門檻') {
                         if (isNaN(val) || val < 0 || val > 100) {
@@ -558,9 +556,9 @@
                             valueErrorMsg = "A+ 比例上限請填寫 0 到 100 之間的數字";
                         }
                     } else if (fieldName === '初始探索學分') {
-                        // 探索學分不但要大於等於0，還必須是沒有小數點的「整數」！
-                        if (isNaN(val) || val < 0 || !Number.isInteger(val)) {
-                            valueErrorMsg = "探索學分請填寫大於等於 0 的整數";
+                        // 🌟 最嚴格的字串檢查！利用正則表達式規定只能由 0-9 數字組成
+                        if (!/^\d+$/.test(valStr) || val < 0 || val > 99999) {
+                            valueErrorMsg = "探索學分請填寫 0 到 99999 之間的整數";
                         }
                     }
                 }
@@ -599,8 +597,12 @@
         
         // 🌟 破解大魔王：在表單送出前，強制結算時間！
         let endTime = Date.now(); 
-        let timeSpent = (endTime - startTime) / 1000; // 算出花了幾秒
-        document.getElementById('page_timer').value = timeSpent; // 填入隱藏框框
+        let timeSpent = (endTime - startTime) / 1000;
+        
+        // 🌟 如果有之前因為 oTree 退回而留下的時間，把它加總起來
+        let timerInput = document.querySelector('input[name="前測時間"]');
+        let previousTime = parseFloat(timerInput.value) || 0;
+        timerInput.value = previousTime + timeSpent;
         
         // 結算完畢，安心送出表單！
         document.getElementById('form').submit();

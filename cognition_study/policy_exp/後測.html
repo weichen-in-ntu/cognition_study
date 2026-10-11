@@ -337,7 +337,7 @@
         }
     }
 
-    // ⭐ 終極防護罩：驗證當前頁面有沒有漏填與數值是否合理
+    // 驗證當前頁面有沒有漏填與數值是否合理
     function validateCurrentSection() {
         let currentId = sections[currentIndex];
         let fields = requiredFields[currentId];
@@ -364,8 +364,8 @@
                     
                     // 針對不同的變數，做嚴格的數值檢查
                     if (fieldName === '最終囤房稅') {
-                        if (isNaN(val) || val < 0) {
-                            valueErrorMsg = "囤房稅率請填寫大於等於 0 的數字";
+                        if (isNaN(val) || val < 0 || val > 99999) {
+                            valueErrorMsg = "囤房稅率請填寫 0 到 99999 之間的數字";
                         }
                     } else if (fieldName === '最終景觀同意門檻') {
                         if (isNaN(val) || val < 0 || val > 100) {
@@ -377,8 +377,8 @@
                         }
                     } else if (fieldName === '最終探索學分') {
                         // 探索學分不但要大於等於0，還必須是沒有小數點的「整數」！
-                        if (isNaN(val) || val < 0 || !Number.isInteger(val)) {
-                            valueErrorMsg = "探索學分請填寫大於等於 0 的整數";
+                        if (isNaN(val) || val < 0 || val > 99999 || !Number.isInteger(val)) {
+                            valueErrorMsg = "探索學分請填寫 0 到 99999 之間的整數";
                         }
                     }
                 }
